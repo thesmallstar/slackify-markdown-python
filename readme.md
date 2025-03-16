@@ -85,4 +85,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgements
 
-Shoutout to [jsarafaj](https://github.com/jsarafajr). The JS library has inspired the code and tests for this package.
+Shoutout to [jsarafaj](https://github.com/jsarafajr), his JS library has inspired the code and tests for this package.
