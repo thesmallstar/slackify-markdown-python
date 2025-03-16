@@ -26,7 +26,6 @@ classifiers = [
   "Operating System :: OS Independent",
   "Intended Audience :: Developers",
   "Topic :: Communications :: Chat",
-  "Topic :: Text Processing :: Markup",
 ]
 
 dependencies = [
