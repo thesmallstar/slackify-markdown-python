@@ -3,7 +3,6 @@ import re
 
 # Todo: Clean code before release.
 def escape_specials(text: str) -> str:
-    # some change
     text = re.sub(r"&", r"&amp;", text)
 
     text = re.sub(r"<(?![@#!])", r"&lt;", text)
