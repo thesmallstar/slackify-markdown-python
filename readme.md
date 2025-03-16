@@ -32,6 +32,9 @@ This is **bold text** and this is *italic text*.
 ## Another Subtitle
 * **Element 1** - *Description 1*
 * **Element 2** - *Description 2*
+
+[Link](https://example.com)
+
 """
 
 slack_output = slackify_markdown(markdown)
@@ -47,8 +50,9 @@ This is *bold text* and this is _italic text_.
 *Another Subtitle*
 •   *Element 1* - _Description 1_
 •   *Element 2* - _Description 2_
+
+<https://example.com|Link>
 """
-```
 
 ## Features
 
