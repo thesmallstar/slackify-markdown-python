@@ -67,7 +67,7 @@ This is *bold text* and this is _italic text_.
 | `**Bold**` | `*Bold*` |
 | `*Italic*` | `_Italic_` |
 | `` `code` `` | `` `code` `` |
-| `[Link](https://example.com)` | `<https://example.com|Link>` |
+| `[Link](https://example.com)` | `<https://example.com\|Link>` |
 
 ## Contributing
 
