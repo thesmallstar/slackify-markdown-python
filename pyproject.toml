@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "slackify_markdown"
-version = "0.1.3"
+version = "0.1.4"
 description = "Convert markdown to Slack-compatible formatting"
-readme = "README.md"
+readme = "readme.md"
 authors = [
   { name="Manthan Surkar", email="manthan1674@gmail.com" }
 ]
