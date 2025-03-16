@@ -86,15 +86,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgements
 
 Shoutout to [jsarafaj](https://github.com/jsarafajr). The JS library has inspired the code and tests for this package.
-
-*Title*
-
-This is *bold text* and this is _italic text_.
-
-*Subtitle*
-1.  *Item 1*
-2.  _Item 2_
-
-*Another Subtitle*
-•   *Element 1* - _Description 1_
-•   *Element 2* - _Description 2_
