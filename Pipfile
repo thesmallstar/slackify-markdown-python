@@ -11,3 +11,6 @@ pytest = "*"
 pre-commit = "*"
 pytest-cov = "*"
 codecov = "*"
+
+[requires]
+python_version = "3"
