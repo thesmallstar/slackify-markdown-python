@@ -31,6 +31,28 @@ def test_user_group_mentions():
     assert slackify_markdown(markdown) == expected
 
 
+def test_bold_italics_strike_bullet_list():
+    markdown = "- **Bold** and _Italic_ with ~~strike~~.\n\n- **Bold** and _Italic_ with ~~strike~~.\n\n"
+    expected = "•   *Bold* and _Italic_ with ~strike~.\n•   *Bold* and _Italic_ with ~strike~.\n"
+    assert slackify_markdown(markdown) == expected
+
+
+def test_bold_italics_strike_ordered_list():
+    markdown = "1. **Bold** and _Italic_ with ~~strike~~.\n\n2. **Bold** and _Italic_ with ~~strike~~.\n\n"
+    expected = "1.  *Bold* and _Italic_ with ~strike~.\n2.  *Bold* and _Italic_ with ~strike~.\n"
+    assert slackify_markdown(markdown) == expected
+
+
+def test_bold_italics_strike_multiline():
+    markdown = """
+**~~_AP-238: New Task for AP Project_~~**
+**~~_AP-222: Citations_~~**
+**~~_AP-160: Write new prompts for GCP_~~**
+    """
+    expected = """*~_AP-238: New Task for AP Project_~*\n*~_AP-222: Citations_~*\n*~_AP-160: Write new prompts for GCP_~*\n"""
+    assert slackify_markdown(markdown) == expected
+
+
 def test_complex_markdown():
     markdown = """
 

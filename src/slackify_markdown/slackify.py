@@ -45,12 +45,16 @@ class SlackifyMarkdown(RendererHTML):
         "th_close",
         "tr_open",
         "tr_close",
+        "hardbreak",
+        "softbreak",
     ]
 
     def __init__(self, markdown_text: str):
         super().__init__()
         self.markdown_text = markdown_text
 
+    # this is not correctly done, we need to check in an nested list,
+    # the library offers allowed tokens/tags. Move to that instead of this :), todo.
     def render(
         self, tokens: List[Token], options: Dict[str, Any], env: Dict[str, Any]
     ) -> str:
@@ -60,6 +64,24 @@ class SlackifyMarkdown(RendererHTML):
                 final_tokens.append(token)
 
         return super().render(final_tokens, options, env)
+
+    def hardbreak(
+        self,
+        tokens: List[Token],
+        idx: int,
+        options: Dict[str, Any],
+        env: Dict[str, Any],
+    ) -> str:
+        return "\n"
+
+    def softbreak(
+        self,
+        tokens: List[Token],
+        idx: int,
+        options: Dict[str, Any],
+        env: Dict[str, Any],
+    ) -> str:
+        return "\n"
 
     def slackify(self) -> str:
         md = MarkdownIt(
