@@ -53,6 +53,7 @@ This is *bold text* and this is _italic text_.
 
 <https://example.com|Link>
 """
+```
 
 ## Features
 
