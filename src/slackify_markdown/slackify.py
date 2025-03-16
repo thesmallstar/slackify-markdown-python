@@ -53,7 +53,7 @@ class SlackifyMarkdown(RendererHTML):
         super().__init__()
         self.markdown_text = markdown_text
 
-    # this is not correctly done, we need to check in an nested list,
+    # this is not correctly done, we need to check in an deopth for children,
     # the library offers allowed tokens/tags. Move to that instead of this :), todo.
     def render(
         self, tokens: List[Token], options: Dict[str, Any], env: Dict[str, Any]
