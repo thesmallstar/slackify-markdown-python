@@ -9,6 +9,8 @@ markdown-it-py = "*"
 [dev-packages]
 pytest = "*"
 pre-commit = "*"
+pytest-cov = "*"
+codecov = "*"
 
 [requires]
 python_version = "3.13"
