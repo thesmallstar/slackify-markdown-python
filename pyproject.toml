@@ -32,11 +32,6 @@ dependencies = [
     "markdown-it-py",
 ]
 
-[project.optional-dependencies]
-dev = [
-  "pytest>=7.0.0",
-]
-
 [project.urls]
 "Homepage" = "https://github.com/thesmallstar/slackify-markdown-python"
 "Bug Tracker" = "https://github.com/thesmallstar/slackify-markdown-python/issues"
@@ -46,3 +41,11 @@ dev = [
 [tool.pytest]
 pythonpath = ["."]
 testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "codecov>=2.1.13",
+    "pre-commit>=3.5.0",
+    "pytest>=8.3.5",
+    "pytest-cov>=5.0.0",
+]
