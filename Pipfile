@@ -11,6 +11,8 @@ pytest = "*"
 pre-commit = "*"
 pytest-cov = "*"
 codecov = "*"
+exceptiongroup = ">1.0.0"
+tomli = ">1.0.0"
 
 [requires]
 python_version = "3"
