@@ -1,1 +1,1 @@
-markdown-it-py
+markdown-it-py>=3.0.0
