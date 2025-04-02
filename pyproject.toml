@@ -29,7 +29,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "markdown-it-py",
+    "markdown-it-py>=3.0.0"
 ]
 
 [project.urls]
