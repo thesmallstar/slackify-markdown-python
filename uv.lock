@@ -620,7 +620,7 @@ wheels = [
 
 [[package]]
 name = "slackify-markdown"
-version = "0.1.5"
+version = "0.1.6"
 source = { editable = "." }
 dependencies = [
     { name = "markdown-it-py" },
@@ -637,7 +637,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "markdown-it-py" }]
+requires-dist = [{ name = "markdown-it-py", specifier = ">=3.0.0" }]
 
 [package.metadata.requires-dev]
 dev = [
