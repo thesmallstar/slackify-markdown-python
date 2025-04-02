@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-markdown-it-py = "*"
+markdown-it-py = ">=3.0.0"
 
 [dev-packages]
 pytest = "*"
