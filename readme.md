@@ -15,9 +15,6 @@ pip install slackify-markdown
 ## Usage
 
 ```python
-from slackify_markdown import slackify
-
-# Convert markdown to Slack mrkdwn
 from slackify_markdown import slackify_markdown
 
 markdown = """
