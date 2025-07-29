@@ -1,0 +1,248 @@
+{
+  "type": "Document",
+  "footnotes": {},
+  "line_number": 1,
+  "children": [
+    {
+      "type": "Heading",
+      "line_number": 1,
+      "level": 1,
+      "children": [
+        {
+          "type": "RawText",
+          "content": "Hello"
+        }
+      ]
+    },
+    {
+      "type": "Quote",
+      "line_number": 3,
+      "children": [
+        {
+          "type": "Paragraph",
+          "line_number": 3,
+          "children": [
+            {
+              "type": "RawText",
+              "content": "A"
+            },
+            {
+              "type": "LineBreak",
+              "content": "",
+              "soft": true
+            },
+            {
+              "type": "RawText",
+              "content": "Some "
+            },
+            {
+              "type": "Emphasis",
+              "children": [
+                {
+                  "type": "RawText",
+                  "content": "emphasis"
+                }
+              ]
+            },
+            {
+              "type": "RawText",
+              "content": ", "
+            },
+            {
+              "type": "Strong",
+              "children": [
+                {
+                  "type": "RawText",
+                  "content": "importance"
+                }
+              ]
+            },
+            {
+              "type": "RawText",
+              "content": ", and "
+            },
+            {
+              "type": "InlineCode",
+              "children": [
+                {
+                  "type": "RawText",
+                  "content": "code"
+                }
+              ]
+            },
+            {
+              "type": "RawText",
+              "content": "."
+            },
+            {
+              "type": "LineBreak",
+              "content": "",
+              "soft": true
+            },
+            {
+              "type": "RawText",
+              "content": "C"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Quote",
+      "line_number": 7,
+      "children": [
+        {
+          "type": "List",
+          "line_number": 7,
+          "loose": false,
+          "start": null,
+          "children": [
+            {
+              "type": "ListItem",
+              "line_number": 7,
+              "leader": "-",
+              "indentation": 0,
+              "prepend": 2,
+              "loose": false,
+              "children": [
+                {
+                  "type": "Paragraph",
+                  "line_number": 7,
+                  "children": [
+                    {
+                      "type": "RawText",
+                      "content": "1"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "ListItem",
+              "line_number": 8,
+              "leader": "-",
+              "indentation": 0,
+              "prepend": 2,
+              "loose": false,
+              "children": [
+                {
+                  "type": "Paragraph",
+                  "line_number": 8,
+                  "children": [
+                    {
+                      "type": "RawText",
+                      "content": "2"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "ListItem",
+              "line_number": 9,
+              "leader": "-",
+              "indentation": 0,
+              "prepend": 2,
+              "loose": false,
+              "children": [
+                {
+                  "type": "Paragraph",
+                  "line_number": 9,
+                  "children": [
+                    {
+                      "type": "RawText",
+                      "content": "3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ThematicBreak",
+      "line_number": 11
+    },
+    {
+      "type": "CodeFence",
+      "line_number": 13,
+      "language": "javascript",
+      "children": [
+        {
+          "type": "RawText",
+          "content": "console.log('!');\n"
+        }
+      ]
+    },
+    {
+      "type": "List",
+      "line_number": 17,
+      "loose": false,
+      "start": null,
+      "children": [
+        {
+          "type": "ListItem",
+          "line_number": 17,
+          "leader": "*",
+          "indentation": 0,
+          "prepend": 2,
+          "loose": false,
+          "children": [
+            {
+              "type": "Paragraph",
+              "line_number": 17,
+              "children": [
+                {
+                  "type": "RawText",
+                  "content": "foo"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ListItem",
+          "line_number": 18,
+          "leader": "*",
+          "indentation": 0,
+          "prepend": 2,
+          "loose": false,
+          "children": [
+            {
+              "type": "Paragraph",
+              "line_number": 18,
+              "children": [
+                {
+                  "type": "RawText",
+                  "content": "bar"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ListItem",
+          "line_number": 19,
+          "leader": "*",
+          "indentation": 0,
+          "prepend": 2,
+          "loose": false,
+          "children": [
+            {
+              "type": "Paragraph",
+              "line_number": 19,
+              "children": [
+                {
+                  "type": "RawText",
+                  "content": "baz"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

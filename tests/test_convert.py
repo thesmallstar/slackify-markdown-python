@@ -153,10 +153,8 @@ This project is a game-changer[^1].
 
     assert slackify_markdown(markdown) == expected_slack_format
 
-
 # # Below tests are ported from https://github.com/jsarafajr/slackify-markdown/blob/master/__test__/slackify-markdown.test.js
 # # The library originally is inspired from https://github.com/jsarafajr/slackify-markdown
-
 
 def test_simple_text():
     assert slackify_markdown("""hello world""") == "hello world\n"
@@ -165,24 +163,20 @@ def test_simple_text():
 def test_escaped_text():
     assert slackify_markdown("*h&ello>world<") == "*h&amp;ello&gt;world&lt;\n"
 
-
 def test_definitions():
     mrkdown = "hello\n\n[1]: http://atlassian.com\n\nworld\n\n[2]: http://atlassian.com"
     slack = "hello\nworld\n"
     assert slackify_markdown(mrkdown) == slack
-
 
 def test_headings():
     mrkdown = "# heading 1\n## heading 2\n### heading 3"
     slack = "*heading 1*\n\n*heading 2*\n\n*heading 3*\n\n"
     assert slackify_markdown(mrkdown) == slack
 
-
 def test_bold():
     mrkdown = "**bold text**"
     slack = "*bold text*\n"
     assert slackify_markdown(mrkdown) == slack
-
 
 def test_bold_character_in_word():
     assert slackify_markdown("he**l**lo") == "he*l*lo\n"
@@ -385,6 +379,34 @@ def test_user_mention():
     mrkdown = "<@UPXGB22A2>"
     slack = "<@UPXGB22A2>\n"
     assert slackify_markdown(mrkdown) == slack
+
+
+def test_italic_in_code_block():
+    mrkdown = "```\n*Please Don’t make me italic pls pls*\n```"
+    slack = "```\n*Please Don’t make me italic pls pls*\n```\n"
+    assert slackify_markdown(mrkdown) == slack
+
+def test_foss_united():
+    mrkdown = "# FOSS\n*united*\n"
+    slack = "*FOSS*\n\n_united_\n"
+    breakpoint()
+    assert slackify_markdown(mrkdown) == slack
+
+def test_blockquote_with_code_block():
+
+    from src.ast_imp import slackify_markdown
+
+    mrkdown = """> - 1
+> - 2
+> - 3
+"""
+    slack = """> •   1
+> •   2
+> •   3
+"""
+
+    assert slackify_markdown(mrkdown) == slack
+
 
 
 # Todo: Add title support

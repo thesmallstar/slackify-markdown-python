@@ -405,6 +405,15 @@ wheels = [
 ]
 
 [[package]]
+name = "mistletoe"
+version = "1.4.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/11/96/ea46a376a7c4cd56955ecdfff0ea68de43996a4e6d1aee4599729453bd11/mistletoe-1.4.0.tar.gz", hash = "sha256:1630f906e5e4bbe66fdeb4d29d277e2ea515d642bb18a9b49b136361a9818c9d", size = 107203 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2a/0f/b5e545f0c7962be90366af3418989b12cf441d9da1e5d89d88f2f3e5cf8f/mistletoe-1.4.0-py3-none-any.whl", hash = "sha256:44a477803861de1237ba22e375c6b617690a31d2902b47279d1f8f7ed498a794", size = 51304 },
+]
+
+[[package]]
 name = "nodeenv"
 version = "1.9.1"
 source = { registry = "https://pypi.org/simple" }
@@ -624,6 +633,7 @@ version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "markdown-it-py" },
+    { name = "mistletoe" },
 ]
 
 [package.dev-dependencies]
@@ -637,7 +647,10 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "markdown-it-py", specifier = ">=3.0.0" }]
+requires-dist = [
+    { name = "markdown-it-py", specifier = ">=3.0.0" },
+    { name = "mistletoe", specifier = ">=1.4.0" },
+]
 
 [package.metadata.requires-dev]
 dev = [
