@@ -1,5 +1,7 @@
 # Slackify Markdown
 
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/slackify-markdown?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/slackify-markdown)
+
 A Python library for converting Markdown to slack specific markdown. This is inspired from existing npm package [slackify-markdown](https://www.npmjs.com/package/slackify-markdown)
 
 ## Overview
