@@ -182,6 +182,12 @@ def test_heading_with_bold():
     assert slackify_markdown("### **Step 1**: Description here") == "*Step 1: Description here*\n\n"
     assert slackify_markdown("### **Step 1**") == "*Step 1*\n\n"
     assert slackify_markdown("# **Test**: text") == "*Test: text*\n\n"
+    assert slackify_markdown("### Normal and **bold**") == "*Normal and bold*\n\n"
+
+
+def test_heading_with_italic():
+    assert slackify_markdown("### *emphasized*") == "*_emphasized_*\n\n"
+    assert slackify_markdown("### ***bold italic***") == "*_bold italic_*\n\n"
 
 
 def test_bold():
