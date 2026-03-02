@@ -10,6 +10,8 @@ from slackify_markdown.utils import escape_specials
 # Todo: Clean code before release.
 class SlackifyMarkdown(RendererHTML):
 
+    _in_heading = False
+
     SUPPORTED_TOKENS = [
         "text",
         "inline",
@@ -112,6 +114,7 @@ class SlackifyMarkdown(RendererHTML):
         options: Dict[str, Any],
         env: Dict[str, Any],
     ) -> str:
+        self.__class__._in_heading = True
         return "*"
 
     def heading_close(
@@ -121,6 +124,7 @@ class SlackifyMarkdown(RendererHTML):
         options: Dict[str, Any],
         env: Dict[str, Any],
     ) -> str:
+        self.__class__._in_heading = False
         return "*\n\n"
 
     def strong_open(
@@ -130,6 +134,8 @@ class SlackifyMarkdown(RendererHTML):
         options: Dict[str, Any],
         env: Dict[str, Any],
     ) -> str:
+        if self._in_heading:
+            return ""
         return "*"
 
     def strong_close(
@@ -139,6 +145,8 @@ class SlackifyMarkdown(RendererHTML):
         options: Dict[str, Any],
         env: Dict[str, Any],
     ) -> str:
+        if self._in_heading:
+            return ""
         return "*"
 
     def em_open(
