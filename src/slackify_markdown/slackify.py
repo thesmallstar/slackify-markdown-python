@@ -10,8 +10,6 @@ from slackify_markdown.utils import escape_specials
 # Todo: Clean code before release.
 class SlackifyMarkdown(RendererHTML):
 
-    _in_heading = False
-
     SUPPORTED_TOKENS = [
         "text",
         "inline",
@@ -54,6 +52,7 @@ class SlackifyMarkdown(RendererHTML):
     def __init__(self, markdown_text: str):
         super().__init__()
         self.markdown_text = markdown_text
+        self._in_heading = False
 
     # this is not correctly done, we need to check in an deopth for children,
     # the library offers allowed tokens/tags. Move to that instead of this :), todo.
@@ -114,7 +113,7 @@ class SlackifyMarkdown(RendererHTML):
         options: Dict[str, Any],
         env: Dict[str, Any],
     ) -> str:
-        self.__class__._in_heading = True
+        self._in_heading = True
         return "*"
 
     def heading_close(
@@ -124,7 +123,7 @@ class SlackifyMarkdown(RendererHTML):
         options: Dict[str, Any],
         env: Dict[str, Any],
     ) -> str:
-        self.__class__._in_heading = False
+        self._in_heading = False
         return "*\n\n"
 
     def strong_open(
