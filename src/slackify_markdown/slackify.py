@@ -64,7 +64,8 @@ class SlackifyMarkdown(RendererHTML):
             if token.type in self.SUPPORTED_TOKENS:
                 final_tokens.append(token)
 
-        return super().render(final_tokens, options, env)
+        rendered = super().render(final_tokens, options, env)
+        return rendered.rstrip("\n") + "\n"
 
     def hardbreak(
         self,
@@ -323,7 +324,11 @@ class SlackifyMarkdown(RendererHTML):
         options: Dict[str, Any],
         env: Dict[str, Any],
     ) -> str:
-        return "\n"
+        # Tight-list items have hidden paragraph tokens; they only need a
+        # single newline between items, not a blank-line block separator.
+        if tokens[idx].hidden:
+            return "\n"
+        return "\n\n"
 
     def blockquote_open(
         self,

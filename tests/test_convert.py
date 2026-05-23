@@ -33,13 +33,13 @@ def test_user_group_mentions():
 
 def test_bold_italics_strike_bullet_list():
     markdown = "- **Bold** and _Italic_ with ~~strike~~.\n\n- **Bold** and _Italic_ with ~~strike~~.\n\n"
-    expected = "•   *Bold* and _Italic_ with ~strike~.\n•   *Bold* and _Italic_ with ~strike~.\n"
+    expected = "•   *Bold* and _Italic_ with ~strike~.\n\n•   *Bold* and _Italic_ with ~strike~.\n"
     assert slackify_markdown(markdown) == expected
 
 
 def test_bold_italics_strike_ordered_list():
     markdown = "1. **Bold** and _Italic_ with ~~strike~~.\n\n2. **Bold** and _Italic_ with ~~strike~~.\n\n"
-    expected = "1.  *Bold* and _Italic_ with ~strike~.\n2.  *Bold* and _Italic_ with ~strike~.\n"
+    expected = "1.  *Bold* and _Italic_ with ~strike~.\n\n2.  *Bold* and _Italic_ with ~strike~.\n"
     assert slackify_markdown(markdown) == expected
 
 
@@ -111,6 +111,7 @@ This project is a game-changer[^1].
     expected_slack_format = """*Project Overview*
 
 Welcome to the *Project X* documentation. This project aims to revolutionize the industry by introducing:
+
 •   _Innovative solutions_
 •   *Cutting-edge technology*
 •   ~Disruptive strategies~
@@ -128,16 +129,20 @@ Welcome to the *Project X* documentation. This project aims to revolutionize the
 *Code Example*
 
 Here's a simple Python function:
+
 ```
 def greet(name):
     return f"Hello, {name}!"
 ```
 > "Code is like humor. When you have to explain it, it’s bad." – _Cory House_
 
+
 *Links and Images*
 
 For more information, visit our <https://example.com|official website>.
+
 <https://example.com/logo.png|Project Logo>
+
 *Table*
 
 | Feature    | Description         |
@@ -145,9 +150,11 @@ For more information, visit our <https://example.com|official website>.
 | Speed      | Fast performance    |
 | Usability  | Easy to use         |
 | Security   | Top-notch protection|
+
 *Footnotes*
 
 This project is a game-changer[^1].
+
 [^1]: According to industry experts.
 """
 
@@ -168,26 +175,26 @@ def test_escaped_text():
 
 def test_definitions():
     mrkdown = "hello\n\n[1]: http://atlassian.com\n\nworld\n\n[2]: http://atlassian.com"
-    slack = "hello\nworld\n"
+    slack = "hello\n\nworld\n"
     assert slackify_markdown(mrkdown) == slack
 
 
 def test_headings():
     mrkdown = "# heading 1\n## heading 2\n### heading 3"
-    slack = "*heading 1*\n\n*heading 2*\n\n*heading 3*\n\n"
+    slack = "*heading 1*\n\n*heading 2*\n\n*heading 3*\n"
     assert slackify_markdown(mrkdown) == slack
 
 
 def test_heading_with_bold():
-    assert slackify_markdown("### **Step 1**: Description here") == "*Step 1: Description here*\n\n"
-    assert slackify_markdown("### **Step 1**") == "*Step 1*\n\n"
-    assert slackify_markdown("# **Test**: text") == "*Test: text*\n\n"
-    assert slackify_markdown("### Normal and **bold**") == "*Normal and bold*\n\n"
+    assert slackify_markdown("### **Step 1**: Description here") == "*Step 1: Description here*\n"
+    assert slackify_markdown("### **Step 1**") == "*Step 1*\n"
+    assert slackify_markdown("# **Test**: text") == "*Test: text*\n"
+    assert slackify_markdown("### Normal and **bold**") == "*Normal and bold*\n"
 
 
 def test_heading_with_italic():
-    assert slackify_markdown("### *emphasized*") == "*_emphasized_*\n\n"
-    assert slackify_markdown("### ***bold italic***") == "*_bold italic_*\n\n"
+    assert slackify_markdown("### *emphasized*") == "*_emphasized_*\n"
+    assert slackify_markdown("### ***bold italic***") == "*_bold italic_*\n"
 
 
 def test_bold():
