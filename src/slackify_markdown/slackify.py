@@ -49,12 +49,24 @@ class SlackifyMarkdown(RendererHTML):
         "softbreak",
     ]
 
+    _BULLETS_BY_DEPTH = ("•", "◦", "▪")
+    _INDENT_UNIT = "    "
+    # U+0002 STX (Start of Text) is the "structural newline" sentinel.
+    # Close-handlers emit this instead of "\n" so render() can cap structural-
+    # newline runs at 2 (one blank line) without touching real \n inside code
+    # blocks. Same approach python-markdown uses for its placeholders.
+    # User input is scrubbed of NEW_LINE in slackify() so collisions are
+    # impossible. See architecture.md for the full rationale.
+    NEW_LINE = "\x02"
+    _NEW_LINE_CAP_RE = re.compile(NEW_LINE + "{3,}")
+
     def __init__(self, markdown_text: str):
         super().__init__()
         self.markdown_text = markdown_text
         self._in_heading = False
+        self._list_depth = 0
 
-    # this is not correctly done, we need to check in an deopth for children,
+    # this is not correctly done, we need to check in an depth for children,
     # the library offers allowed tokens/tags. Move to that instead of this :), todo.
     def render(
         self, tokens: List[Token], options: Dict[str, Any], env: Dict[str, Any]
@@ -65,6 +77,11 @@ class SlackifyMarkdown(RendererHTML):
                 final_tokens.append(token)
 
         rendered = super().render(final_tokens, options, env)
+        # Cap structural-newline runs at 2 (one blank line), then materialize
+        # to real \n. Code blocks emit real \n directly, so their content is
+        # not affected by the cap.
+        rendered = self._NEW_LINE_CAP_RE.sub(self.NEW_LINE * 2, rendered)
+        rendered = rendered.replace(self.NEW_LINE, "\n")
         return rendered.rstrip("\n") + "\n"
 
     def hardbreak(
@@ -86,6 +103,10 @@ class SlackifyMarkdown(RendererHTML):
         return "\n"
 
     def slackify(self) -> str:
+        # Scrub the sentinel char from user input so it can't collide with our
+        # newline-cap machinery in render(). markdown-it-py does not strip
+        # ASCII control chars, so we have to do it here.
+        text = self.markdown_text.replace(self.NEW_LINE, "")
         md = MarkdownIt(
             "gfm-like",
             renderer_cls=type(self),
@@ -96,7 +117,7 @@ class SlackifyMarkdown(RendererHTML):
             },
         ).disable("table")
 
-        return md.render(self.markdown_text)
+        return md.render(text)
 
     def text(
         self,
@@ -125,7 +146,7 @@ class SlackifyMarkdown(RendererHTML):
         env: Dict[str, Any],
     ) -> str:
         self._in_heading = False
-        return "*\n\n"
+        return f"*{self.NEW_LINE}{self.NEW_LINE}"
 
     def strong_open(
         self,
@@ -257,6 +278,7 @@ class SlackifyMarkdown(RendererHTML):
         options: Dict[str, Any],
         env: Dict[str, Any],
     ) -> str:
+        self._list_depth += 1
         return ""
 
     def bullet_list_close(
@@ -266,7 +288,8 @@ class SlackifyMarkdown(RendererHTML):
         options: Dict[str, Any],
         env: Dict[str, Any],
     ) -> str:
-        return ""
+        self._list_depth -= 1
+        return self.NEW_LINE
 
     def list_item_open(
         self,
@@ -275,10 +298,11 @@ class SlackifyMarkdown(RendererHTML):
         options: Dict[str, Any],
         env: Dict[str, Any],
     ) -> str:
+        indent = self._INDENT_UNIT * max(self._list_depth - 1, 0)
         if tokens[idx].info:
-            return f"{tokens[idx].info}.  "
-        else:
-            return "•   "
+            return f"{indent}{tokens[idx].info}.  "
+        depth_idx = min(max(self._list_depth - 1, 0), len(self._BULLETS_BY_DEPTH) - 1)
+        return f"{indent}{self._BULLETS_BY_DEPTH[depth_idx]}   "
 
     def list_item_close(
         self,
@@ -296,7 +320,7 @@ class SlackifyMarkdown(RendererHTML):
         options: Dict[str, Any],
         env: Dict[str, Any],
     ) -> str:
-
+        self._list_depth += 1
         return ""
 
     def ordered_list_close(
@@ -306,7 +330,8 @@ class SlackifyMarkdown(RendererHTML):
         options: Dict[str, Any],
         env: Dict[str, Any],
     ) -> str:
-        return ""
+        self._list_depth -= 1
+        return self.NEW_LINE
 
     def paragraph_open(
         self,
@@ -327,8 +352,8 @@ class SlackifyMarkdown(RendererHTML):
         # Tight-list items have hidden paragraph tokens; they only need a
         # single newline between items, not a blank-line block separator.
         if tokens[idx].hidden:
-            return "\n"
-        return "\n\n"
+            return self.NEW_LINE
+        return f"{self.NEW_LINE}{self.NEW_LINE}"
 
     def blockquote_open(
         self,
@@ -346,7 +371,7 @@ class SlackifyMarkdown(RendererHTML):
         options: Dict[str, Any],
         env: Dict[str, Any],
     ) -> str:
-        return "\n"
+        return self.NEW_LINE
 
     def image(
         self,
